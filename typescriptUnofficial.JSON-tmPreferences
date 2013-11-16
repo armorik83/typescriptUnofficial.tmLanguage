@@ -1,0 +1,191 @@
+{
+    "comment": "TypeScript Syntax Unofficial: version 1.0",
+    "name": "TypeScript Unofficial",
+    "scopeName": "source.ts",
+    "fileTypes": ["ts", "str"],
+    "patterns": [
+        {
+            "patterns": [
+                {"include": "#variable"},
+                {"include": "#ternaryOperation"},
+                {"include": "#functionCall"}
+            ]
+        },
+        {
+            "match": "\\b(module)\\s*(\\s*[a-zA-Z0-9_?.$][\\w?.$]*)\\s*",
+            "name": "meta.function.ts",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.ts"
+                },
+                "2": {
+                    "name": "variable.parameter.function.name.module.ts"
+                },
+            },
+            "comment": "Match stuff like: module name {...}"
+        },
+        {
+            "match": "\\b(interface)\\s*(\\s*[a-zA-Z0-9_?.$][\\w?.$]*)\\s*",
+            "name": "meta.function.ts",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.ts"
+                },
+                "2": {
+                    "name": "variable.parameter.function.name.interface.ts"
+                },
+            },
+            "comment": "Match stuff like: interface name {...}"
+        },
+        {
+            "match": "\\b(class)\\s*(\\s*[a-zA-Z0-9_?.$][\\w?.$]*)\\s*",
+            "name": "meta.function.ts",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.ts"
+                },
+                "2": {
+                    "name": "variable.parameter.function.name.class.ts"
+                },
+            },
+            "comment": "Match stuff like: class name {...}"
+        },
+        {
+            "match": "\\b(string|bool|boolean|number)\\b",
+            "name": "storage.type.variable.ts",
+            "comment": "Match variable type keywords"
+        },
+        {
+            "match": "(=\\s*)*(\\b|(\\)*)|(this)*)(\\.)([\\w?$]*)(\\()",
+            "name": "meta.function.ts",
+            "captures": {
+                "3": {"name": "meta.brace.round.end.ts"},
+                "4": {"name": "storage.type.variable.this.ts"},
+                "5": {"name": "meta.delimiter.method.period.ts"},
+                "6": {"name": "meta.function.call.ts"},
+                "7": {"name": "meta.brace.round.begin.ts"}
+            },
+            "comment": "Match function call"
+        },
+        {
+            "match": "\\b(constructor|declare|interface|as|AS)\\b",
+            "name": "keyword.operator.ts",
+            "comment": "Match stuff like: constructor"
+        },
+        {
+            "match": "(super)\\s*\\(([a-zA-Z0-9,_?.$\\s]+\\s*)\\)",
+            "name": "keyword.other.ts",
+            "captures": {
+                "1": {
+                    "name": "storage.type.variable.super.ts"
+                }
+            },
+            "comment": "Match stuff like: super(argument, list)"
+        },
+        {
+            "name": "meta.function.ts",
+            "begin": "\\b(public|private)\\s*([a-zA-Z_?$][\\w?$]*)(\\()",
+            "beginCaptures": {
+                "1": { "name": "storage.modifier.ts" },
+                "2": { "name": "entity.name.function.class.ts" },
+                "3": { "name": "meta.brace.round.begin.ts" }
+            },
+            "patterns": [
+                {
+                    "include": "#variable"
+                },
+                {
+                    "match": "(\\))*\\s*:\\s*(\\w*|\\w*\\[\\])",
+                    "captures": {
+                        "1": {"name": "meta.brace.round.end.ts"},
+                        "2": {"name": "storage.type.variable.ts"}
+                    }
+                }
+            ],
+            "end": "\\{",
+            "comment": "class function(arg: type):type"
+        },
+        {
+            "name": "meta.function.ts",
+            "begin": "\\b(function)\\s*([a-zA-Z_?$][\\w?$]*)(\\()",
+            "beginCaptures": {
+                "1": { "name": "storage.modifier.ts" },
+                "2": { "name": "entity.name.function.ts" },
+                "3": { "name": "meta.brace.round.begin.ts" }
+            },
+            "patterns": [
+                {
+                    "include": "#variable"
+                },
+                {
+                    "match": "(\\))*\\s*:\\s*(\\w*|\\w*\\[\\])",
+                    "captures": {
+                        "1": {"name": "meta.brace.round.end.ts"},
+                        "2": {"name": "storage.type.variable.ts"}
+                    }
+                }
+            ],
+            "end": "\\{",
+            "comment": "function(arg: type):type"
+        },
+        {
+            "begin": "(var)",
+            "beginCaptures": {
+                "1": { "name": "storage.type.ts" },
+            },
+            "patterns": [
+                {"include": "#variable"},
+                {"include": "#functionCall"}
+            ],
+            "end": "$",
+            "comment": "var x:x = obj.func();"
+        },
+        {
+            "include": "source.js"
+        }
+    ],
+    "repository": {
+        "ternaryOperation": {
+            "begin": "\\?",
+            "patterns": [
+                {
+                    "include": "source.js"
+                }
+            ],
+            "end": ":",
+            "comment": "? foo : var ;"
+        },
+        "variable": {
+            "begin": "([a-zA-Z0-9_?$][\\w?$]*)\\s*:\\s*([a-zA-Z0-9_?$][\\w?$]*)",
+            "name": "",
+            "beginCaptures": {
+                "1": {"name": "variable.parameter.function.ts"},
+                "2": {"name": "variable.parameter.function.type.ts"}
+            },
+            "patterns": [
+                {"include": "source.js"},
+                {"include": "#functionCall"},
+            ],
+            "end": "((\\))|(;)|(,))",
+            "endCaptures": {
+                "2": {"name": "meta.brace.round.end.ts"},
+                "3": {"name": "punctuation.terminator.statement.ts"},
+                "4": {"name": "meta.delimiter.object.comma.ts"}
+            },
+            "comment": "Match stuff like: (function: return type)"
+        },
+        "functionCall": {
+            "match": "\\s*(\\b|(\\)*)|(this)*|\\w+)(\\.)([\\w?$]*)(\\()",
+            "name": "meta.function.ts",
+            "captures": {
+                "2": {"name": "meta.brace.round.end.ts"},
+                "3": {"name": "storage.type.variable.this.ts"},
+                "4": {"name": "meta.delimiter.method.period.ts"},
+                "5": {"name": "meta.function.call.ts"},
+                "6": {"name": "meta.brace.round.begin.ts"}
+            },
+            "comment": "Match function call"
+        }
+    },
+    "uuid": "8106cf69-96e4-4e3c-b8f9-0cdce3f15604"
+}
