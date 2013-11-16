@@ -129,18 +129,6 @@
             "comment": "function(arg: type):type"
         },
         {
-            "begin": "(var)",
-            "beginCaptures": {
-                "1": { "name": "storage.type.ts" },
-            },
-            "patterns": [
-                {"include": "#variable"},
-                {"include": "#functionCall"}
-            ],
-            "end": "$",
-            "comment": "var x:x = obj.func();"
-        },
-        {
             "include": "source.js"
         }
     ],
