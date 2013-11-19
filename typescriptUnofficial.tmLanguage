@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>comment</key>
-    <string>TypeScript Syntax Unofficial: version 1.0</string>
+    <string>TypeScript Syntax Unofficial: version 1.0.1</string>
     <key>fileTypes</key>
     <array>
         <string>ts</string>
@@ -100,42 +100,6 @@
             <string>\b(string|bool|boolean|number)\b</string>
             <key>name</key>
             <string>storage.type.variable.ts</string>
-        </dict>
-        <dict>
-            <key>captures</key>
-            <dict>
-                <key>3</key>
-                <dict>
-                    <key>name</key>
-                    <string>meta.brace.round.end.ts</string>
-                </dict>
-                <key>4</key>
-                <dict>
-                    <key>name</key>
-                    <string>storage.type.variable.this.ts</string>
-                </dict>
-                <key>5</key>
-                <dict>
-                    <key>name</key>
-                    <string>meta.delimiter.method.period.ts</string>
-                </dict>
-                <key>6</key>
-                <dict>
-                    <key>name</key>
-                    <string>meta.function.call.ts</string>
-                </dict>
-                <key>7</key>
-                <dict>
-                    <key>name</key>
-                    <string>meta.brace.round.begin.ts</string>
-                </dict>
-            </dict>
-            <key>comment</key>
-            <string>Match function call</string>
-            <key>match</key>
-            <string>(=\s*)*(\b|(\)*)|(this)*)(\.)([\w?$]*)(\()</string>
-            <key>name</key>
-            <string>meta.function.ts</string>
         </dict>
         <dict>
             <key>comment</key>
@@ -261,7 +225,7 @@
                         </dict>
                     </dict>
                     <key>match</key>
-                    <string>(\))*\s*:\s*(\w*|\w*\[\])</string>
+                    <string>(\))*\s*:*\s*(\w*|\w*\[\])</string>
                 </dict>
             </array>
         </dict>
@@ -274,7 +238,9 @@
     <dict>
         <key>functionCall</key>
         <dict>
-            <key>captures</key>
+            <key>begin</key>
+            <string>\s*(\b|(\)*)|(this)*|\w+)(\.)([\w?$]*)(\()</string>
+            <key>beginCaptures</key>
             <dict>
                 <key>2</key>
                 <dict>
@@ -304,10 +270,25 @@
             </dict>
             <key>comment</key>
             <string>Match function call</string>
-            <key>match</key>
-            <string>\s*(\b|(\)*)|(this)*|\w+)(\.)([\w?$]*)(\()</string>
+            <key>end</key>
+            <string>(\))</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>meta.brace.round.end.ts</string>
+                </dict>
+            </dict>
             <key>name</key>
             <string>meta.function.ts</string>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>$self</string>
+                </dict>
+            </array>
         </dict>
         <key>ternaryOperation</key>
         <dict>
