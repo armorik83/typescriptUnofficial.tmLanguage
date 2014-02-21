@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>comment</key>
-    <string>TypeScript Syntax Unofficial: version 1.0.1</string>
+    <string>TypeScript Syntax Unofficial: version 1.1</string>
     <key>fileTypes</key>
     <array>
         <string>ts</string>
@@ -236,6 +236,38 @@
     </array>
     <key>repository</key>
     <dict>
+        <key>casting</key>
+        <dict>
+            <key>begin</key>
+            <string>(&lt;)([a-zA-Z0-9_?$][\w?$]*)</string>
+            <key>beginCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>meta.brace.angle.ts</string>
+                </dict>
+                <key>2</key>
+                <dict>
+                    <key>name</key>
+                    <string>variable.parameter.function.type.ts</string>
+                </dict>
+            </dict>
+            <key>comment</key>
+            <string>&lt;type casting&gt;</string>
+            <key>end</key>
+            <string>(&gt;)</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>meta.brace.angle.ts</string>
+                </dict>
+            </dict>
+            <key>patterns</key>
+            <array/>
+        </dict>
         <key>functionCall</key>
         <dict>
             <key>begin</key>
@@ -349,6 +381,10 @@
             <string></string>
             <key>patterns</key>
             <array>
+                <dict>
+                    <key>include</key>
+                    <string>#casting</string>
+                </dict>
                 <dict>
                     <key>include</key>
                     <string>source.js</string>
