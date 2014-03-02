@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>comment</key>
-    <string>TypeScript Syntax Unofficial: version 1.1.1</string>
+    <string>TypeScript Syntax Unofficial: version 1.1.2</string>
     <key>fileTypes</key>
     <array>
         <string>ts</string>
@@ -153,7 +153,15 @@
             <key>comment</key>
             <string>class function(arg: type):type</string>
             <key>end</key>
-            <string>\{</string>
+            <string>(\{)</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>meta.brace.curly.ts</string>
+                </dict>
+            </dict>
             <key>name</key>
             <string>meta.function.ts</string>
             <key>patterns</key>
@@ -209,7 +217,15 @@
             <key>comment</key>
             <string>function(arg: type):type</string>
             <key>end</key>
-            <string>\{</string>
+            <string>(\{)</string>
+            <key>endCaptures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>meta.brace.curly.ts</string>
+                </dict>
+            </dict>
             <key>name</key>
             <string>meta.function.ts</string>
             <key>patterns</key>
@@ -217,6 +233,10 @@
                 <dict>
                     <key>include</key>
                     <string>#variable</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#casting</string>
                 </dict>
                 <dict>
                     <key>captures</key>
@@ -233,7 +253,7 @@
                         </dict>
                     </dict>
                     <key>match</key>
-                    <string>(\))*\s*:*\s*(\w*|\w*\[\])</string>
+                    <string>(\))*\s*:\s*(\w*|\w*\[\])</string>
                 </dict>
             </array>
         </dict>

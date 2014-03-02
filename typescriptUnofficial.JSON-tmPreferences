@@ -1,5 +1,5 @@
 {
-    "comment": "TypeScript Syntax Unofficial: version 1.1.1",
+    "comment": "TypeScript Syntax Unofficial: version 1.1.2",
     "name": "TypeScript Unofficial",
     "scopeName": "source.ts",
     "fileTypes": ["ts", "str"],
@@ -76,7 +76,10 @@
                     }
                 }
             ],
-            "end": "\\{",
+            "end": "(\\{)",
+            "endCaptures": {
+                "1": { "name": "meta.brace.curly.ts" },
+            },
             "comment": "class function(arg: type):type"
         },
         {
@@ -89,15 +92,19 @@
             },
             "patterns": [
                 {"include": "#variable"},
+                {"include": "#casting"},
                 {
-                    "match": "(\\))*\\s*:*\\s*(\\w*|\\w*\\[\\])",
+                    "match": "(\\))*\\s*:\\s*(\\w*|\\w*\\[\\])",
                     "captures": {
                         "1": {"name": "meta.brace.round.end.ts"},
                         "2": {"name": "storage.type.variable.ts"}
                     }
                 }
             ],
-            "end": "\\{",
+            "end": "(\\{)",
+            "endCaptures": {
+                "1": { "name": "meta.brace.curly.ts" },
+            },
             "comment": "function(arg: type):type"
         },
         {"include": "source.js"}
